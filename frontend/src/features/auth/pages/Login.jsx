@@ -1,34 +1,28 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../authSlice';
 import '../styles/auth.scss';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, error, token } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, [token, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:3000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        alert('Login Successful');
-        localStorage.setItem('token', data.token);
-        console.log('Token:', data.token);
-      } else {
-        alert(data.message || 'Login failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Something went wrong!');
-    }
+    dispatch(loginUser(formData));
   };
 
   return (
@@ -36,11 +30,13 @@ const Login = () => {
       <div className="auth-container">
         <div className="auth-content">
           <div className="auth-box">
-            <h2>InstaClone</h2>
             <form onSubmit={handleSubmit}>
               <input type="text" name="email" placeholder="Phone number, username, or email" value={formData.email} onChange={handleChange} required />
               <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
-              <button type="submit" className="submit-btn">Log In</button>
+              {error && <p className="error-message">{error}</p>}
+              <button type="submit" className="submit-btn" disabled={loading}>
+                {loading ? 'Logging in...' : 'Log In'}
+              </button>
             </form>
 
             <div className="divider">OR</div>
@@ -61,7 +57,7 @@ const Login = () => {
             <p>Get the app.</p>
             <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
               <img src="https://imgs.search.brave.com/BarvjVuBAqiiY-FV_blwPG5GYR9NLiwKoxvTTI8vuhI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pY29u/YXBlLmNvbS93cC1j/b250ZW50L3BuZ19s/b2dvX3ZlY3Rvci9k/b3dubG9hZC1vbi10/aGUtYXBwLXN0b3Jl/LWxvZ28ucG5n" alt="App Store" height="40" />
-              <img src="https://tse1.mm.bing.net/th/id/OIP.5XrTLHgx7u1AgW3jR4i2uQHaCN?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Google Play" height="40" />
+              <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffreepngimg.com%2Fthumb%2Fandroid%2F67015-play-google-app-store-android-free-transparent-image-hd.png&f=1&nofb=1&ipt=1df1142a705c7337793ad7f06b77ec6394ac3e40ad4f71a80af3d594c1c45001" alt="Google Play" height="40" />
             </div>
           </div>
         </div>
