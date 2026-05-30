@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../authSlice';
+import { useAuth } from '../hooks/useAuth';
 import '../styles/auth.scss';
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, token } = useSelector((state) => state.auth);
+  const { handleLogin, loading, error, token } = useAuth();
+  const { email, password } = formData;
 
   useEffect(() => {
     if (token) {
@@ -22,7 +21,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(formData));
+    handleLogin({ email, password });
   };
 
   return (
@@ -31,8 +30,22 @@ const Login = () => {
         <div className="auth-content">
           <div className="auth-box">
             <form onSubmit={handleSubmit}>
-              <input type="text" name="email" placeholder="Phone number, username, or email" value={formData.email} onChange={handleChange} required />
-              <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+              <input 
+                type="text" 
+                name="email" 
+                placeholder="Phone number, username, or email" 
+                value={email} 
+                onChange={handleChange} 
+                required 
+              />
+              <input 
+                type="password" 
+                name="password" 
+                placeholder="Password" 
+                value={password} 
+                onChange={handleChange} 
+                required 
+              />
               {error && <p className="error-message">{error}</p>}
               <button type="submit" className="submit-btn" disabled={loading}>
                 {loading ? 'Logging in...' : 'Log In'}
@@ -46,7 +59,7 @@ const Login = () => {
               Log in with Google
             </button>
 
-            <p style={{ fontSize: '12px', marginTop: '20px', cursor: 'pointer', color: 'rgba(255,255,255,0.7)' }}>Forgot password?</p>
+            <p className="forgot-password">Forgot password?</p>
           </div>
 
           <div className="switch-box">

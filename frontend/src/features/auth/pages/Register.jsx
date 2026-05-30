@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { registerUser } from '../authSlice';
+import { useAuth } from '../hooks/useAuth';
 import '../styles/auth.scss';
 
 const Register = () => {
   const [formData, setFormData] = useState({ username: '', email: '', password: '' });
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, token } = useSelector((state) => state.auth);
+  const { handleRegister, loading, error, token } = useAuth();
+  const { username, email, password } = formData;
 
   useEffect(() => {
     if (token) {
@@ -22,7 +21,8 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerUser(formData));
+    // Call the handleRegister function from the useAuth hook
+    handleRegister({ username, email, password });
   };
 
   return (
@@ -33,17 +33,38 @@ const Register = () => {
             <h2>InstaClone</h2>
             <p style={{ color: 'white', fontSize: '17px', fontWeight: '600', marginBottom: '15px', opacity: 0.9 }}>Sign up to see photos and videos from your friends.</p>
 
-            <button className="google-btn" style={{ background: 'rgba(255,255,255,0.2)', color: 'white', padding: '10px', borderRadius: '10px' }} onClick={() => alert('Google Register Clicked')}>
+            <button className="google-btn secondary" onClick={() => alert('Google Register Clicked')}>
               <img src="https://cdn-icons-png.flaticon.com/128/300/300221.png" alt="G" width="16" style={{ filter: 'brightness(0) invert(1)' }} />
-              Log in with Google
+              Sign up with Google
             </button>
 
             <div className="divider">OR</div>
 
             <form onSubmit={handleSubmit}>
-              <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-              <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} required />
-              <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+              <input 
+                type="email" 
+                name="email" 
+                placeholder="Email" 
+                value={email} 
+                onChange={handleChange} 
+                required 
+              />
+              <input 
+                type="text" 
+                name="username" 
+                placeholder="Username" 
+                value={username} 
+                onChange={handleChange} 
+                required 
+              />
+              <input 
+                type="password" 
+                name="password" 
+                placeholder="Password" 
+                value={password} 
+                onChange={handleChange} 
+                required 
+              />
 
               <p style={{ color: 'white', fontSize: '11px', margin: '10px 0', opacity: 0.8 }}>
                 People who use our service may have uploaded your contact information to Instagram.
