@@ -5,6 +5,6 @@ import { registerController, loginController } from '../controller/user.controll
 
 authRouter.post('/register', registerController);
 authRouter.post('/login', loginController);
-authRouter.get
+// authRouter.getme('/me', );
 
 export default authRouter;

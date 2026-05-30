@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cookie&display=swap');
+
+$primary-gradient: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+$glass-bg: rgba(255, 255, 255, 0.05);
+$glass-border: rgba(255, 255, 255, 0.1);
+$text-main: #ffffff;
+$text-sub: rgba(255, 255, 255, 0.6);
+
+.post-feature {
+    min-height: 100vh;
+    background: #000;
+    color: $text-main;
+    font-family: 'Inter', sans-serif;
+    padding-bottom: 50px;
+
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid $glass-border;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            font-family: 'Cookie', cursive;
+            font-size: 2.5rem;
+            background: $primary-gradient;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+
+            a {
+                color: white;
+                text-decoration: none;
+                font-weight: 500;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+
+    .feed-container {
+        max-width: 600px;
+        margin: 30px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .post-card {
+        background: $glass-bg;
+        border: 1px solid $glass-border;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+        }
+
+        .post-header {
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            .avatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background: $primary-gradient;
+                padding: 2px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    background: #000;
+                }
+            }
+
+            .username {
+                font-weight: 600;
+                font-size: 0.9rem;
+            }
+        }
+
+        .post-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-top: 1px solid $glass-border;
+            border-bottom: 1px solid $glass-border;
+        }
+
+        .post-content {
+            padding: 12px;
+
+            .actions {
+                display: flex;
+                gap: 15px;
+                margin-bottom: 10px;
+                font-size: 1.5rem;
+                cursor: pointer;
+
+                i:hover {
+                    color: #e1306c;
+                }
+            }
+
+            .likes {
+                font-weight: 600;
+                font-size: 0.9rem;
+                margin-bottom: 5px;
+            }
+
+            .caption {
+                font-size: 0.9rem;
+                line-height: 1.4;
+
+                span {
+                    font-weight: 600;
+                    margin-right: 8px;
+                }
+            }
+
+            .timestamp {
+                font-size: 0.75rem;
+                color: $text-sub;
+                margin-top: 8px;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    .create-post-container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 30px;
+        background: $glass-bg;
+        backdrop-filter: blur(20px);
+        border: 1px solid $glass-border;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+        h1 {
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .upload-area {
+            border: 2px dashed $glass-border;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+
+            &:hover {
+                border-color: #c13584;
+                background: rgba(193, 53, 132, 0.05);
+            }
+
+            .preview-img {
+                max-width: 100%;
+                border-radius: 8px;
+            }
+
+            p {
+                color: $text-sub;
+            }
+        }
+
+        .caption-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid $glass-border;
+            border-radius: 10px;
+            padding: 15px;
+            color: white;
+            font-family: inherit;
+            resize: none;
+            margin-bottom: 20px;
+            outline: none;
+
+            &:focus {
+                border-color: #fff;
+            }
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: $primary-gradient;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s;
+
+            &:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            &:hover:not(:disabled) {
+                opacity: 0.9;
+            }
+        }
+    }
+}
