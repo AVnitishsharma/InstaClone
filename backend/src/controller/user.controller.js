@@ -29,10 +29,10 @@ export const registerController = async (req, res) => {
 };
 
 export const loginController = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { identifier, password } = req.body;
 
   try {
-    const user = await userModel.findOne({ $or: [{ email }, { username }] });
+    const user = await userModel.findOne({ $or: [{ email: identifier }, { username: identifier }] });
     if (!user) {
       return res.status(401).json({ message: 'Invalid username or email' });
     }

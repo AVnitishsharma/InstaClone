@@ -18,9 +18,9 @@ export async function register({ username, email, password }) {
     }
 }
 
-export async function login({ email, password }) {
+export async function login({ identifier, password }) {
     try {
-        const response = await axiosInstance.post('/login', { email, password });
+        const response = await axiosInstance.post('/login', { identifier, password });
         return response.data;
     } catch (error) {
         throw error.response ? error.response.data : new Error('Network error');

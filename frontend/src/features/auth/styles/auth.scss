@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
 
-* {
+html, body, * {
     box-sizing: border-box; // Ensures padding doesn't affect total width
+    margin: 0;
+    padding: 0;
 }
 
 .auth-page {

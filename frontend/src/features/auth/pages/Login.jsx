@@ -4,10 +4,10 @@ import { useAuth } from '../hooks/useAuth';
 import '../styles/auth.scss';
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [formData, setFormData] = useState({ identifier: '', password: '' });
   const navigate = useNavigate();
   const { handleLogin, loading, error, token } = useAuth();
-  const { email, password } = formData;
+  const { identifier, password } = formData;
 
   useEffect(() => {
     if (token) {
@@ -21,7 +21,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin({ email, password });
+    handleLogin({ identifier, password });
   };
 
   return (
@@ -32,9 +32,9 @@ const Login = () => {
             <form onSubmit={handleSubmit}>
               <input 
                 type="text" 
-                name="email" 
+                name="identifier" 
                 placeholder="Phone number, username, or email" 
-                value={email} 
+                value={identifier} 
                 onChange={handleChange} 
                 required 
               />
