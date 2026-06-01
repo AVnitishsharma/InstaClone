@@ -1,0 +1,197 @@
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 73px; // Sidebar width (adjusted dynamically in Sidebar.jsx if needed)
+    height: 100vh;
+    width: 397px;
+    background: black;
+    z-index: 100;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.05);
+    border-inline: 1px solid #262626;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+
+    &.active {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .search-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        background: rgb(0, 0, 0);
+        position: relative;
+        z-index: 101;
+        border-radius: 0 16px 16px 0;
+        overflow: hidden;
+    }
+
+    .search-header {
+        padding: 24px 16px 12px;
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            background: #1c1c1c;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            padding: 4px 12px;
+            
+            input {
+                color: #ffffff;
+                width: 100%;
+                background: transparent;
+                border: none;
+                padding: 8px 0;
+                font-size: 16px;
+                outline: none;
+
+                &::placeholder {
+                    color: #c1c1c1;
+                    font-weight: 300;
+                }
+            }
+
+            .clear-btn {
+                background: none;
+                border: none;
+                color: #ffffff;
+                cursor: pointer;
+                padding: 0;
+                font-size: 18px;
+                display: flex;
+                align-items: center;
+
+                &:hover {
+                    color: #8e8e8e;
+                }
+            }
+        }
+    }
+
+    .search-content {
+        flex: 1;
+        overflow-y: auto;
+        padding-top: 12px;
+
+        .search-history,
+        .search-results {
+            .history-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 16px 8px;
+                border-top: 1px solid #262626;
+                padding-top: 16px;
+                margin-top: 8px;
+
+                h3 {
+                    color: #f5f5f5;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+
+                .clear-all-btn {
+                    background: none;
+                    border: none;
+                    color: #0095f6;
+                    font-weight: 600;
+                    font-size: 14px;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: #00376b;
+                    }
+                }
+            }
+
+            .no-recent,
+            .no-results,
+            .loading {
+                padding: 40px 16px;
+                text-align: center;
+                color: #8e8e8e;
+                font-size: 14px;
+            }
+
+            ul {
+                list-style: none;
+                padding: 0;
+
+                li {
+                    padding: 8px 16px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: background 0.2s;
+
+                    &:hover {
+                        background: #1a1a1a;
+                    }
+
+                    img {
+                        width: 44px;
+                        height: 44px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-right: 12px;
+                    }
+
+                    .user-details {
+                        display: flex;
+                        flex-direction: column;
+                        flex: 1;
+
+                        .username {
+                            font-size: 14px;
+                            font-weight: 600;
+                            color: #f5f5f5;
+                        }
+
+                        .name {
+                            font-size: 14px;
+                            color: #a8a8a8;
+                        }
+                    }
+
+                    .remove-btn {
+                        background: none;
+                        border: none;
+                        color: #8e8e8e;
+                        font-size: 20px;
+                        cursor: pointer;
+                        padding: 4px;
+
+                        &:hover {
+                            color: #f5f5f5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .overlay-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: transparent;
+        z-index: 99;
+    }
+}
+
+// Sidebar modifications when search is open might be needed
+// For example, making certain icons only show as glyphs

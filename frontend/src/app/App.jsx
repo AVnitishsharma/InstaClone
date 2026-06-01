@@ -4,6 +4,8 @@ import Register from '../features/auth/pages/Register.jsx';
 import Login from '../features/auth/pages/Login.jsx';
 import Feed from '../features/posts/pages/Feed.jsx';
 import CreatePost from '../features/posts/pages/CreatePost.jsx';
+import Profile from '../features/auth/pages/Profile.jsx';
+import EditProfile from '../features/auth/pages/EditProfile.jsx';
 
 const App = () => {
   return (
@@ -13,6 +15,8 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/create" element={<CreatePost />} />
+        <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/profile/edit" element={<EditProfile />} />
       </Routes>
     </Router>
   );
