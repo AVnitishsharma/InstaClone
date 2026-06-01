@@ -9,6 +9,14 @@ const postService = {
         const response = await axiosInstance.post('/create', postData);
         return response.data;
     },
+    getPostById: async (id) => {
+        const response = await axiosInstance.get(`/${id}`);
+        return response.data;
+    },
+    likePost: async (id) => {
+        const response = await axiosInstance.post(`/${id}/like`);
+        return response.data;
+    },
 };
 
 export default postService;

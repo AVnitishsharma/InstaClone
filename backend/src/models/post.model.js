@@ -17,6 +17,10 @@ const postSchema = new mongoose.Schema({
       required: [true, "Image URL is required"],
     }
   },
+  likes: {
+    type: Number,
+    default: 0,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

@@ -6,54 +6,18 @@ $glass-border: rgba(255, 255, 255, 0.1);
 $text-main: #ffffff;
 $text-sub: rgba(255, 255, 255, 0.6);
 
-.post-feature {
+.main-layout {
+    display: flex; /* Sidebar और Feed को अगल-बगल लाने के लिए */
     min-height: 100vh;
     background: #000;
     color: $text-main;
     font-family: 'Inter', sans-serif;
-    padding-bottom: 50px;
-
-    .navbar {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        background: rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid $glass-border;
-        padding: 10px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .logo {
-            font-family: 'Cookie', cursive;
-            font-size: 2.5rem;
-            background: $primary-gradient;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-
-            a {
-                color: white;
-                text-decoration: none;
-                font-weight: 500;
-
-                &:hover {
-                    opacity: 0.8;
-                }
-            }
-        }
-    }
 
     .feed-container {
+        flex: 1; /* बची हुई जगह को फीड कवर करे */
         max-width: 600px;
-        margin: 30px auto;
+        margin: 0 auto;
+        padding: 30px 20px;
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -67,7 +31,7 @@ $text-sub: rgba(255, 255, 255, 0.6);
         transition: transform 0.3s ease;
 
         &:hover {
-            transform: translateY(-5px);
+            transform: scale(1.02);
         }
 
         .post-header {
@@ -103,6 +67,7 @@ $text-sub: rgba(255, 255, 255, 0.6);
             object-fit: cover;
             border-top: 1px solid $glass-border;
             border-bottom: 1px solid $glass-border;
+            cursor: pointer; /* इमेज को क्लिक करने योग्य दिखाने के लिए */
         }
 
         .post-content {
@@ -142,6 +107,49 @@ $text-sub: rgba(255, 255, 255, 0.6);
                 margin-top: 8px;
                 text-transform: uppercase;
             }
+        }
+    }
+
+    /* Shimmer Animation (Moving Light) */
+    @keyframes shimmer {
+        0% { background-position: -450px 0; }
+        100% { background-position: 450px 0; }
+    }
+
+    .skeleton {
+        background: #1a1a1a;
+        /* Light gradient jo left to right move hoga */
+        background-image: linear-gradient(
+            to right, 
+            #1a1a1a 0%, 
+            #333333 20%, 
+            #1a1a1a 40%, 
+            #1a1a1a 100%
+        );
+        background-repeat: no-repeat;
+        background-size: 900px 100%;
+        animation: shimmer 2s infinite linear;
+        border-radius: 4px;
+        display: block;
+    }
+
+    .skeleton-card {
+        pointer-events: none;
+
+        .username-skeleton {
+            width: 120px;
+            height: 14px;
+        }
+
+        .likes-skeleton {
+            width: 80px;
+            height: 12px;
+            margin-bottom: 8px;
+        }
+
+        .caption-skeleton {
+            width: 90%;
+            height: 12px;
         }
     }
 

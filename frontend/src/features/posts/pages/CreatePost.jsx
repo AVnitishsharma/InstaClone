@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { usePosts } from '../hooks/usePosts';
+import Sidebar from '../../shared/Sidebar';
 import '../styles/post.scss';
 
 const CreatePost = () => {
@@ -33,16 +34,8 @@ const CreatePost = () => {
     };
 
     return (
-        <div className="post-feature">
-            <nav className="navbar">
-                <Link to="/" className="logo">Instagram</Link>
-                <div className="nav-links">
-                    <Link to="/">Home</Link>
-                    <Link to="/create">Create</Link>
-                    <Link to="/login">Logout</Link>
-                </div>
-            </nav>
-
+        <div className="main-layout">
+            <Sidebar />
             <div className="create-post-container">
                 <h1>Create New Post</h1>
                 <form onSubmit={handleSubmit}>

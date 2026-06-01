@@ -32,11 +32,39 @@ export const usePosts = () => {
         }
     };
 
+    const fetchPostById = async (id) => {
+        dispatch(setLoading(true));
+        try {
+            const post = await postService.getPostById(id);
+            return post;
+        } catch (err) {
+            dispatch(setError(err.response?.data?.message || 'Failed to fetch post'));
+            throw err;
+        } finally {
+            dispatch(setLoading(false));
+        }
+    }
+
+    const likePost = async (id) => {
+        dispatch(setLoading(true));
+        try {
+            const post = await postService.likePost(id);
+            return post;
+        } catch (err) {
+            dispatch(setError(err.response?.data?.message || 'Failed to like post'));
+            throw err;
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+
     return {
         posts,
         loading,
         error,
         fetchPosts,
         handleCreatePost,
+        fetchPostById,
+        likePost,
     };
 };

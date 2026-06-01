@@ -1,28 +1,36 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { usePosts } from '../hooks/usePosts';
+import Sidebar from '../../shared/Sidebar';
 import '../styles/post.scss';
 
 const Feed = () => {
-    const { posts, loading, error, fetchPosts } = usePosts();
+    const { posts, loading, error, fetchPosts, fetchPostById, likePost } = usePosts();
 
     useEffect(() => {
         fetchPosts();
     }, []);
 
     return (
-        <div className="post-feature">
-            <nav className="navbar">
-                <Link to="/" className="logo">Instagram</Link>
-                <div className="nav-links">
-                    <Link to="/">Home</Link>
-                    <Link to="/create">Create</Link>
-                    <Link to="/login">Logout</Link>
-                </div>
-            </nav>
-
+        
+        <div className="main-layout">
+            <Sidebar />
             <div className="feed-container">
-                {loading && <p style={{ textAlign: 'center' }}>Loading posts...</p>}
+                {loading && posts.length === 0 && (
+                    [1, 2, 3].map((n) => (
+                        <div key={n} className="post-card skeleton-card">
+                            <div className="post-header">
+                                <div className="avatar skeleton"></div>
+                                <div className="username-skeleton skeleton"></div>
+                            </div>
+                            <div className="post-image skeleton"></div>
+                            <div className="post-content">
+                                <div className="likes-skeleton skeleton"></div>
+                                <div className="caption-skeleton skeleton"></div>
+                            </div>
+                        </div>
+                    ))
+                )}
+
                 {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
 
                 {!loading && posts.length === 0 && (
@@ -38,15 +46,28 @@ const Feed = () => {
                             <span className="username">{post.author?.username || 'anonymous'}</span>
                         </div>
 
-                        <img src={post.image?.url} alt="post" className="post-image" />
+                        <img 
+                            onClick={() => {
+                                console.log("Fetching post with ID:", post._id);
+                                if (typeof fetchPostById === 'function') {
+                                    fetchPostById(post._id);
+                                } else {
+                                    console.warn("fetchPostById function is not defined in usePosts hook");
+                                }
+                            }} 
+                            src={post.image?.url} alt="post" 
+                            className="post-image" 
+                        />
 
                         <div className="post-content">
                             <div className="actions">
-                                <span>❤️</span>
-                                <span>💬</span>
-                                <span>✈️</span>
+                                <span onClick={() => likePost(post._id)}>
+                                    <i className='bx bx-heart nav-icon'></i>
+                                </span>
+                                <span><i className='bx bx-message-rounded'></i></span>
+                                <span><i className='bx bx-paper-plane nav-icon'></i></span>
                             </div>
-                            <div className="likes">1,234 likes</div>
+                            <div className="likes">{post.likes} likes</div>
                             <div className="caption">
                                 <span>{post.author?.username || 'anonymous'}</span>
                                 {post.caption}

@@ -1,0 +1,52 @@
+.sidebar {
+    width: 245px;
+    height: 100vh;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    background: #000;
+
+    .sidebar-logo {
+        padding: 20px 10px 30px;
+        .logo {
+            text-decoration: none;
+        }
+        .logo-full {
+            font-family: 'Cookie', cursive;
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logo-short { display: none; }
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex-grow: 1;
+    }
+
+    .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 12px;
+        text-decoration: none;
+        color: white;
+        border-radius: 8px;
+        transition: background 0.2s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-icon { font-size: 1.5rem; }
+        .nav-text { font-size: 1rem; }
+    }
+}
