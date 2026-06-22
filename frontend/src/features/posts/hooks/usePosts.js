@@ -49,6 +49,7 @@ export const usePosts = () => {
         dispatch(setLoading(true));
         try {
             const post = await postService.likePost(id);
+            await fetchPosts();
             return post;
         } catch (err) {
             dispatch(setError(err.response?.data?.message || 'Failed to like post'));

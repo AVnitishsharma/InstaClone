@@ -6,7 +6,8 @@ import '../shared/sidebar.scss';
 
 const Sidebar = () => {
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.auth);
+    const user = useSelector((state) => state.auth.user);
+    console.log(user);
 
     return (
         <>

@@ -10,6 +10,8 @@ const Feed = () => {
         fetchPosts();
     }, []);
 
+    
+
     return (
         
         <div className="main-layout">
@@ -78,6 +80,9 @@ const Feed = () => {
                         </div>
                     </div>
                 ))}
+            </div>
+            <div className="follo-suggestions">
+                followers Suggestions
             </div>
         </div>
     );

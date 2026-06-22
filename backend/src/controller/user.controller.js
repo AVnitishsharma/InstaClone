@@ -30,7 +30,10 @@ export const registerController = async (req, res) => {
 
     const token = await sendToken(user, res);
 
-    res.status(201).json({ message: 'User registered successfully', token });
+    const userResponse = user.toObject();
+    delete userResponse.password;
+
+    res.status(201).json({ message: 'User registered successfully', token, user: userResponse });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'register error' });
@@ -52,13 +55,26 @@ export const loginController = async (req, res) => {
     }
 
     const token = await sendToken(user, res);
-    res.status(200).json({ message: 'Login successful', token });
+
+    const userResponse = user.toObject();
+    delete userResponse.password;
+
+    res.status(200).json({ message: 'Login successful', token, user: userResponse });
   }
   catch (error) {
     console.error(error);
     res.status(500).json({ message: 'login error' });
   }
 }
+
+export const getCurrentUser = async (req, res) => {
+  try {
+    res.status(200).json({ user: req.user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching current user' });
+  }
+};
 
 export const searchUsers = async (req, res) => {
   const { query } = req.query;

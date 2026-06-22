@@ -22,6 +22,9 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin({ identifier, password });
+    if (token) {
+      navigate('/');
+    }
   };
 
   return (
@@ -29,22 +32,23 @@ const Login = () => {
       <div className="auth-container">
         <div className="auth-content">
           <div className="auth-box">
+            <h2>InstaClone</h2>
             <form onSubmit={handleSubmit}>
-              <input 
-                type="text" 
-                name="identifier" 
-                placeholder="Phone number, username, or email" 
-                value={identifier} 
-                onChange={handleChange} 
-                required 
+              <input
+                type="text"
+                name="identifier"
+                placeholder="Phone number, username, or email"
+                value={identifier}
+                onChange={handleChange}
+                required
               />
-              <input 
-                type="password" 
-                name="password" 
-                placeholder="Password" 
-                value={password} 
-                onChange={handleChange} 
-                required 
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={handleChange}
+                required
               />
               {error && <p className="error-message">{error}</p>}
               <button type="submit" className="submit-btn" disabled={loading}>

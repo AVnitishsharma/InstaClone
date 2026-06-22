@@ -15,24 +15,25 @@ $text-sub: rgba(255, 255, 255, 0.6);
 
     .feed-container {
         flex: 1; /* बची हुई जगह को फीड कवर करे */
-        max-width: 600px;
-        margin: 0 auto;
+        max-width: 500px;
+        margin-left: auto;
         padding: 30px 20px;
         display: flex;
         flex-direction: column;
         gap: 20px;
+        // background-color: blue;
+    }
+
+    .follo-suggestions {
+        // flex: 1;
+        width: 30%;
+        // background-color: #fd1d1d;
+        margin-right: auto;
     }
 
     .post-card {
-        background: $glass-bg;
-        border: 1px solid $glass-border;
-        border-radius: 12px;
         overflow: hidden;
         transition: transform 0.3s ease;
-
-        &:hover {
-            transform: scale(1.02);
-        }
 
         .post-header {
             padding: 12px;
@@ -44,14 +45,14 @@ $text-sub: rgba(255, 255, 255, 0.6);
                 width: 32px;
                 height: 32px;
                 border-radius: 50%;
-                background: $primary-gradient;
-                padding: 2px;
+                background: #fff;
+                padding: 1px;
 
                 img {
                     width: 100%;
                     height: 100%;
                     border-radius: 50%;
-                    background: #000;
+                    background: #000000;
                 }
             }
 
@@ -63,11 +64,11 @@ $text-sub: rgba(255, 255, 255, 0.6);
 
         .post-image {
             width: 100%;
-            aspect-ratio: 1 / 1;
+            // aspect-ratio: 1.91 / 1;
             object-fit: cover;
             border-top: 1px solid $glass-border;
             border-bottom: 1px solid $glass-border;
-            cursor: pointer; /* इमेज को क्लिक करने योग्य दिखाने के लिए */
+            cursor: pointer;
         }
 
         .post-content {

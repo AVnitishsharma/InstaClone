@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { fetchCurrentUser } from '../features/auth/state/auth.slice.js';
 import Register from '../features/auth/pages/Register.jsx';
 import Login from '../features/auth/pages/Login.jsx';
 import Feed from '../features/posts/pages/Feed.jsx';
@@ -8,6 +10,12 @@ import Profile from '../features/auth/pages/Profile.jsx';
 import EditProfile from '../features/auth/pages/EditProfile.jsx';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
   return (
     <Router>
       <Routes>
